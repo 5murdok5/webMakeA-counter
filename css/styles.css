@@ -3,3 +3,23 @@
     background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
 
 }
+
+#bangge{
+    margin-top: 95px;
+}
+
+#counters_row{
+    padding: 3em;
+    background-color: cadetblue;
+}
+#counter_editor{
+    /* margin-top: 1em; */
+}
+#counters_imputs{
+    background-color:#343a40;
+    padding-top: 2em;
+
+}
+#counters_list{
+    padding-top: 2em;
+}

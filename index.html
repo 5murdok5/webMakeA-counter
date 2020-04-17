@@ -6,48 +6,199 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Bootswatch Theme -->
-    <link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.min.css">
+    <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
     <link rel="stylesheet" href="./css/styles.css">
 
     <title>primera pagina</title>
 </head>
 
-<body id="bodyPrincipal">
-    <div class="container" >
-        <div class="row">
-            <div class="col-md-12 min-vh-100 d-flex flex-column justify-content-center">
+<body>
+    <!-- id="bodyPrincipal" -->
 
-                <div class="col-lg-6 col-md-8 mx-auto">
-                    <div class="card">
-                        <div class="card-header text-center">
-                            <h4>MakeA-Contador</h4>
-                        </div>
-                        <form id="loginUser" class="card-body needs-validation">
-                            <!-- inputs entradas -->
-                            <div class="form-group">
-                                <input type="text" id="NameUser" placeholder="Usuario" class="form-control " autocomplete="off" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="password" id="PassWord" placeholder="Contrasena" class="form-control" autocomplete="off" required>
-                            </div>
-                            <div class="form-group" id="re-pass" style="display: none;">
-                                <input type="password" id="re-PassWord" placeholder="Re-Pass" class="form-control" autocomplete="off" >
-                            </div>
-                            <div class="form-group" id="correo" style="display: none;">
-                                <input type="email" id="email" placeholder="Correo" class="form-control" autocomplete="off" >
-                            </div>
+    <div id="homelg">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="#">MakeA-Contador</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-                            <!-- buttons -->
-                            <input type="submit" value="Inicio"  id="inicio" class="btn btn-success btn-block" style="display: '';">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item ">
+                            <a class="nav-link" href="" data-toggle="modal" data-target="#exampleModalCenter">Info</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="" data-toggle="modal" data-target="#ExitModal">Exit</a>
+                        </li>
 
-                            <input type="submit" value="Registrate" id="registrate" class="btn btn-warning btn-block">
+                    </ul>
 
-                            <input type="button" value="ingresa sin Registro" class="btn btn-secondary btn-block" disabled> 
-                        </form>
-                    </div>
                 </div>
             </div>
+        </nav>
+
+        <!-- modales en pantalla -->
+        <div class="modal fade" id="ExitModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body text-center">
+                  <h4>Estas seguro de Cerrar Sesion</h4>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary">Salir</button>
+                </div>
+              </div>
+            </div>
+          </div>
+      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalCenterTitle">make A Contador</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body text-justify">
+              <h4>Informacion y descripcion</h4>
+              <br />
+                <p >Make A Contador es una utilidad para agregar un contador a tu página web, permite administrar desde un solo lugar un contador que puedes mostrar en diferentes paginas, si es modificado aquí, el cambio se refleja en los demás.</p>
+                <p>Además es un proyecto con código abierto, puedes visualizar el contenido en el siguiente enlace de gitHub, ayudar a mejorar la sintaxis, o tomarlo como una guia para tus proyectos.
+                </p>
+                <p>Está realizado con librerías de bootstraps, jquery, y realizado en javascript.</p>
+
+              <br />
+                <h5>Creditos:</h5> 
+                <div class="row">
+                    <div class="col-sm">
+                        <h6>Desarrollador:</h6> 
+                    </div>
+                    <div class="col-sm">
+                        <strong>Santiago Moreno B</strong>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm">
+
+                <h6>Correo:</h6> 
+                    </div>
+                    <div class="col-sm">
+                        santiago.moreno52@gmail.com
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm">
+
+                        <h6>Repositorio GitHub:</h6> 
+                    </div>
+                    <div class="col-sm">
+                        
+                        <a href="https://github.com/5murdok5">5Murdok5</a>
+                    </div>
+                </div>
+            
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
         </div>
+      </div>
+      <!-- fin modales de pantalla -->
+        <div class="jumbotron" id="bangge">
+            <div class="container">
+                <h1 class="display-3">Make A-Contador</h1>
+                <p class="lead">Crea, Administra y comparte, un contador para tu Web</p>
+                
+            </div>
+        </div>
+        <div class="row text-center" id="counters_row" >
+            <div class="col-sm">
+                <h1>
+                    23.50
+                </h1>
+                <h5>
+                    numero de canastas
+                </h5>
+            </div>
+            <div class="col-sm">
+                <h1>
+                    23.50
+                </h1>
+                <h5>
+                    numero de canastas
+                </h5>
+            </div>
+            <div class="col-sm">
+                <h1>
+                    23.50
+                </h1>
+                <h5>
+                    numero de canastas
+                </h5>
+            </div>
+          </div>
+          <div class="row" id="counter_editor">
+            <div class="col-sm" id="counters_imputs">
+                <h1 class="text-center" style="color: white;">
+                    Editor de Contador
+                </h1>
+                <form id="loginUser" class="card-body needs-validation">
+                    <!-- inputs entradas -->
+                    
+                    <div class="form-group">
+                        <input type="text" id="nameCounter" placeholder="nombre del contador" class="form-control" autocomplete="off" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" id="valueCounter" placeholder="valor contador" class="form-control" autocomplete="off" required>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm">
+                                <h5 style="color: white; padding-top: 1em; margin: auto;">
+                                    Color del texto:
+                                </h5>
+                            </div>
+                            <div class="col-sm">
+                                <div class="form-group">
+                                    <input type="color" id="valueCounter" class="form-control" value="#ccc">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm">
+                                <h5  style="color: white; padding-top: 1em; margin: auto;">
+                                    Color Fondo:
+                                </h5>
+                            </div>
+                            <div class="col-sm">
+                                <div class="form-group">
+                                    <input type="color" id="valueCounter" class="form-control" value="#ccc">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- buttons -->
+                    <input type="submit" value="agregar"  id="inicio" class="btn btn-success btn-block" style="display: '';">
+                </form>
+            </div>
+            <div class="col-sm" id="counters_list">
+                <h1 class="text-center">
+                    Contadores Agregados
+                </h1>
+            </div>
+          </div>
+
     </div>
 
     <!-- firebase -->
@@ -59,15 +210,15 @@
 
     <!-- js aplicacion -->
     <script src="js/app.js"></script>
-    
+
     <!-- bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
-      
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+
 </body>
 
 </html>
