@@ -12,10 +12,47 @@
     <title>primera pagina</title>
 </head>
 
-<body>
-    <!-- id="bodyPrincipal" -->
-
-    <div id="homelg">
+<body id="bodyPrincipal">
+    <!--  --> 
+    <div id="lgform" style="display: '';">
+        <div class="container" >
+            <div class="row">
+                <div class="col-md-12 min-vh-100 d-flex flex-column justify-content-center">
+    
+                    <div class="col-lg-6 col-md-8 mx-auto">
+                        <div class="card">
+                            <div class="card-header text-center">
+                                <h4>MakeA-Contador</h4>
+                            </div>
+                            <form id="loginUser" class="card-body needs-validation">
+                                <!-- inputs entradas -->
+                                <div class="form-group">
+                                    <input type="text" id="NameUser" placeholder="Usuario" class="form-control " autocomplete="off" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" id="PassWord" placeholder="Contrasena" class="form-control" autocomplete="off" required>
+                                </div>
+                                <div class="form-group" id="re-pass" style="display: none;">
+                                    <input type="password" id="re-PassWord" placeholder="Re-Pass" class="form-control" autocomplete="off" >
+                                </div>
+                                <div class="form-group" id="correo" style="display: none;">
+                                    <input type="email" id="email" placeholder="Correo" class="form-control" autocomplete="off" >
+                                </div>
+    
+                                <!-- buttons -->
+                                <input type="submit" value="Inicio"  id="inicio" class="btn btn-success btn-block" style="display: '';">
+    
+                                <input type="submit" value="Registrate" id="registrate" class="btn btn-warning btn-block">
+    
+                                <input type="button" value="ingresa sin Registro" class="btn btn-secondary btn-block" disabled> 
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="homelg" style="display: none;">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
             <div class="container">
                 <a class="navbar-brand" href="#">MakeA-Contador</a>
@@ -196,8 +233,26 @@
                 <h1 class="text-center">
                     Contadores Agregados
                 </h1>
+
+                <table class="table table-hover table-dark">
+                    <thead>
+                      <tr>
+                        <th scope="col">Nombre Contador</th>
+                        <th scope="col">Valor Contdor</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                  </table> 
+                  <div id="data">
+                      
+                  </div>
             </div>
           </div>
+          
 
     </div>
 

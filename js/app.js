@@ -40,21 +40,21 @@ class LoginUser {
 
 // UI Constructor
 class UI {
-    addProduct(product) {
-        const productList = document.getElementById('loginUser');
+    addProduct(UserData) {
+        const userDatalist = document.getElementById('data');
         /* crea un elemento en el dom con el contador */
         const element = document.createElement('div');
         element.innerHTML = `
             <div class="card text-center mb-4">
                 <div class="card-body">
-                    <strong>Product</strong>: ${product.name} -
-                    <strong>Price</strong>: ${product.price} - 
-                    <strong>Year</strong>: ${product.year}
+                    <strong>userName</strong>: ${UserData.user_name} -
+                    <strong>password</strong>: ${UserData.user_pass}  
+                    
                     <a href="#" class="btn btn-danger" name="delete">Delete</a>
                 </div>
             </div>
         `;
-        productList.appendChild(element);
+        userDatalist.appendChild(element);
     }
     /* oculta/muestra cualquier objero */
     hidenObj(elemnt, status) {
@@ -100,9 +100,12 @@ document.getElementById("inicio").addEventListener("click", function (e) {
           pass = document.getElementById('PassWord').value;
 
     if (user === 'admin' || pass ==='12345') {
-        window.location = '../src/count.html';
+        
+    ui.hidenObj('lgform', 'none');
+    ui.hidenObj('homelg', '');
+        ui.showMessage('ingreso exitoso', 'success');
     } else {
-        ui.showMessage('las Password no Iguales', 'danger');
+        ui.showMessage('Nombre de Usuario o Password Invalidas', 'danger');
     }
    
     e.preventDefault();
@@ -117,21 +120,27 @@ document.getElementById("registrate").addEventListener("click", function (e) {
     ui.hidenObj('inicio', 'none');
     ui.hidenObj('re-pass', '');
     ui.hidenObj('correo', '');
+    
     const user = document.getElementById('NameUser').value,
           pass = document.getElementById('PassWord').value,
           email = document.getElementById('email').value,
           repass = document.getElementById('re-PassWord').value;
-
+    const newUser = new UserData(user,pass);
     if (email === '' || repass === '') {
         ui.showMessage('rellene los campos de registro', 'info');
 
     } else if (lg.validar_pass(pass, repass)) {
         if (lg.validar_email(email)) {
             ui.showMessage('registro exitoso', 'success');
+            
+            
+            ui.resetForm();
             ui.hidenObj('inicio', '');
             ui.hidenObj('re-pass', 'none');
             ui.hidenObj('correo', 'none');
             ui.resetForm();
+            ui.showMessage('Product Added Successfully', 'success');
+            ui.addProduct(newUser);
         } else {
             ui.showMessage('El correo esta mal', 'danger');
         }
@@ -141,40 +150,7 @@ document.getElementById("registrate").addEventListener("click", function (e) {
     e.preventDefault();
 });
 
-    var canvas = document.getElementById('canvas_picker').getContext('2d');
 
-    // create an image object and get it"™s source
-    var img = new Image();
-    img.src = 'image.jpg';
-
-    // copy the image to the canvas
-    $(img).load(function(){
-      canvas.drawImage(img,0,0);
-    });
-
-    // http://www.javascripter.net/faq/rgbtohex.htm
-    function rgbToHex(R,G,B) {return toHex(R)+toHex(G)+toHex(B)}
-    function toHex(n) {
-      n = parseInt(n,10);
-      if (isNaN(n)) return "00";
-      n = Math.max(0,Math.min(n,255));
-      return "0123456789ABCDEF".charAt((n-n%16)/16)  + "0123456789ABCDEF".charAt(n%16);
-    }
-    $('#canvas_picker').click(function(event){
-      // getting user coordinates
-      var x = event.pageX - this.offsetLeft;
-      var y = event.pageY - this.offsetTop;
-      // getting image data and RGB values
-      var img_data = canvas.getImageData(x, y, 1, 1).data;
-      var R = img_data[0];
-      var G = img_data[1];
-      var B = img_data[2];  var rgb = R + ',' + G + ',' + B;
-      // convert RGB to HEX
-      var hex = rgbToHex(R,G,B);
-      // making the color the value of the input
-      $('#rgb input').val(rgb);
-      $('#hex input').val('#' + hex);
-    });
 // DOM Events
 
 
