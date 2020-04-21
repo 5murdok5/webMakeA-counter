@@ -23,3 +23,9 @@
 #counters_list{
     padding-top: 2em;
 }
+.jumbotron {
+    margin-bottom: 0rem;
+}
+.alert{
+    margin-top: 30px;
+}

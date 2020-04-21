@@ -52,6 +52,7 @@
             </div>
         </div>
     </div>
+    <!-- cotenido pagina -->
     <div id="homelg" style="display: none;">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
             <div class="container">
@@ -150,6 +151,7 @@
         </div>
       </div>
       <!-- fin modales de pantalla -->
+      <!-- inicio jumbotron -->
         <div class="jumbotron" id="bangge">
             <div class="container">
                 <h1 class="display-3">Make A-Contador</h1>
@@ -157,38 +159,16 @@
                 
             </div>
         </div>
+        <div class="container">
         <div class="row text-center" id="counters_row" >
-            <div class="col-sm">
-                <h1>
-                    23.50
-                </h1>
-                <h5>
-                    numero de canastas
-                </h5>
-            </div>
-            <div class="col-sm">
-                <h1>
-                    23.50
-                </h1>
-                <h5>
-                    numero de canastas
-                </h5>
-            </div>
-            <div class="col-sm">
-                <h1>
-                    23.50
-                </h1>
-                <h5>
-                    numero de canastas
-                </h5>
-            </div>
+           
           </div>
           <div class="row" id="counter_editor">
             <div class="col-sm" id="counters_imputs">
                 <h1 class="text-center" style="color: white;">
                     Editor de Contador
                 </h1>
-                <form id="loginUser" class="card-body needs-validation">
+                <form id="counter_form" class="card-body needs-validation">
                     <!-- inputs entradas -->
                     
                     <div class="form-group">
@@ -206,7 +186,7 @@
                             </div>
                             <div class="col-sm">
                                 <div class="form-group">
-                                    <input type="color" id="valueCounter" class="form-control" value="#ccc">
+                                    <input type="color" id="colortext" class="form-control" value="#ccc">
                                 </div>
                             </div>
                         </div>
@@ -220,7 +200,7 @@
                             </div>
                             <div class="col-sm">
                                 <div class="form-group">
-                                    <input type="color" id="valueCounter" class="form-control" value="#ccc">
+                                    <input type="color" id="colorback" class="form-control" value="#ccc">
                                 </div>
                             </div>
                         </div>
@@ -234,7 +214,7 @@
                     Contadores Agregados
                 </h1>
 
-                <table class="table table-hover table-dark">
+                <table class="table table-hover table-dark" id="data_list">
                     <thead>
                       <tr>
                         <th scope="col">Nombre Contador</th>
@@ -253,7 +233,7 @@
             </div>
           </div>
           
-
+        </div>
     </div>
 
     <!-- firebase -->
