@@ -1,17 +1,3 @@
-/* // Your web app's Firebase configuration
-var firebaseConfig = {
-    apiKey: "AIzaSyCibDxDovJlSl23xl6Lhrk_Q-69T0ozhJM",
-    authDomain: "contadores-19b0e.firebaseapp.com",
-    databaseURL: "https://contadores-19b0e.firebaseio.com",
-    projectId: "contadores-19b0e",
-    storageBucket: "contadores-19b0e.appspot.com",
-    messagingSenderId: "421095019754",
-    appId: "1:421095019754:web:ac9c20aceec50e164a3393",
-    measurementId: "G-E5SG82VJTP"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  var database = firebase.database(); */
 
 // Product Constructor
 
