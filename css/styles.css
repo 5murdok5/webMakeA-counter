@@ -10,7 +10,15 @@
 
 #counters_row{
     padding: 3em;
-    background-color: cadetblue;
+    background-color: rgb(80, 80, 80);
+}
+#showCode, #counters_row{
+    background-color: rgb(80, 80, 80);
+    height: 100%;
+}
+
+#count_num, #count_title{
+    color: white;
 }
 #counter_editor{
     /* margin-top: 1em; */
