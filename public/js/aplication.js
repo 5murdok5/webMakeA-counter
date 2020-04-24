@@ -7,12 +7,10 @@ var firebaseConfig = {
     messagingSenderId: "421095019754",
     appId: "1:421095019754:web:ac9c20aceec50e164a3393",
     measurementId: "G-E5SG82VJTP"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  var database = firebase.database();
-  
-
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig)
+var database = firebase.database();
 
 class Counters {
     constructor(count_id, count_name, count_value) {
@@ -23,54 +21,107 @@ class Counters {
 }
 
 class UserData {
-    constructor(user_name, user_pass) {
+    constructor(user_name, user_pass, user_email) {
         this.user_name = user_name;
         this.user_pass = user_pass;
-       // this.user_email = user_email;
+        this.user_email = user_email;
 
     }
 }
-/* 
+
 class dbinformation {
-
-
-    watchTable() {
-        console.log('dentro de watch');
-        const ui = new UI();
-        var refCount = firebase.ref('/users/SXYqY9NzCyXaunUJSqeOYWZqwCh1/counters/');
+    
+    getElemnets() {
+        console.log('dentro de la funcion')
+        const lg =  new LoginUser();
+        const ui =  new UI();
+        var userId = lg.UserOn();
+        var refCount = firebase.database().ref('/users/' + userId + "/counters/");
         refCount.on("child_added", function (data) {
           var countvalue = data.val();
-          const contadores = new Counters(countvalue.count_id, countvalue.count_name, countvalue.count_value);
-          var result = ui.addCounterPreview(contadores);
-          innerHTML("loadCounter", result);
+          const counter =  new Counters(countvalue.count_id, countvalue.count_name, countvalue.count_value);
+          ui.addCounter(counter);
+          ui.addCounterPreview(counter);
+          
         });
       }
 
+    dataInforU(username, email) {
+        localStorage.setItem('user', username);
+        localStorage.setItem('email', email);
+        console.log("datos guardados en localstorage");
+    }
 
-} */
+}
 
 class LoginUser {
-    logUser(user, pass) {
-        var access;
-        if (user === 'admin') {
-            if (pass === '12345') {
-
-                access = true;
-            } else {
-                access = false;
-            }
-        }
-        return access;
+    UserOn(){
+        var userId = firebase.auth().currentUser.uid;
+        return userId;
     }
+    Register(UserData) {
+
+        const ui = new UI();
+        const userUp = UserData.user_name + "@user.com";
+        const db = new dbinformation();
+        console.log(userUp);
+
+        firebase.auth().createUserWithEmailAndPassword(userUp, UserData.user_pass)
+            .then(function (user) {
+                console.log('datos almacenados');
+                db.dataInforU(UserData.user_name, UserData.user_email);
+                ui.hidenObj('lgform', 'none');
+                ui.hidenObj('homelg', '');
+                ui.showMessage('Has Ingresado', 'success');
+            })
+            .catch(function (error) {
+                console.error(error)
+                ui.showMessage('error al registrar el Usuario', 'warning');
+            });
+    }
+
+    passCorrect(repass, pass) {
+
+        let check;
+        const ui = new UI();
+        if (repass === pass) {
+            check = true;
+
+        } else {
+            check = false;
+            ui.showMessage("las contrasenias no coinciden", "warning");
+            console.log(repass + " / " + pass);
+        }
+        /*  */
+        return check;
+    }
+
+    logUser(user, pass) {
+
+        const ui = new UI();
+        var userLg = user + "@user.com";
+
+        firebase.auth().signInWithEmailAndPassword(userLg, pass)
+            .then(function (user) {
+                ui.hidenObj('lgform', 'none');
+                ui.hidenObj('homelg', '');
+                ui.showMessage('ingreso exitoso', 'success');
+
+            }).catch(function (error) {
+                ui.showMessage(error, 'danger');
+            });
+    }
+
 
     validar_email(email) {
         var regex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
         return regex.test(email) ? true : false;
     }
 
-    validar_pass(pass, repass) {
-        return pass === repass ? true : false;
-    }
+    /*     validar_pass(pass, repass) {
+            return pass === repass ? true : false;
+        } */
+
     /* guarda los datos para luego ser almacenados */
     dataInforU(username, email) {
 
@@ -78,6 +129,20 @@ class LoginUser {
         localStorage.setItem('email', email);
         console.log("datos guardados en localstorage");
 
+    }
+    exit() {
+
+        const ui = new UI();
+
+        firebase.auth().signOut().then(function () {
+            this,
+            ui.showMessage('Saliste Correctamente', "info");
+            ui.hidenObj('lgform', '');
+            ui.hidenObj('homelg', 'none');
+
+        }).catch(function (error) {
+            ui.showMessage(error, "danger");
+        });
     }
 }
 
@@ -110,10 +175,10 @@ class UI {
                 ${Counters.count_name} 
             </h5>`;
         userDatalist.appendChild(element);
-        this.startAnimation();
     }
 
     startAnimation() {
+        console.log('comenzo la animacion');
         $(".num").counterUp({
             delay: 5,
             time: 3000
@@ -134,10 +199,15 @@ class UI {
             this.showMessage('Product Deleted Succsssfully', 'info');
         }
     }
+    reStart() {
+        window.location.reload();
+    }
+    
+
     /* control de mensajes de alerta */
     showMessage(message, cssClass) {
         const div = document.createElement('div');
-        div.className = `container alert alert-${cssClass} mt-2 fixed-top`;
+        div.className = `container alert alert-${cssClass} mt-2 fixed-top text-center`;
         div.appendChild(document.createTextNode(message));
         // Show in The DOM
         const container = document.querySelector('#bodyPrincipal');
@@ -154,71 +224,87 @@ class UI {
 
 }
 
-document.getElementById("inicio").addEventListener("click", function (e) {
 
+window.onload = function () {
     const ui = new UI();
+    const lg = new dbinformation();
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        ui.showMessage('Ya ingresaste', "info");
+        ui.hidenObj('lgform', 'none');
+        ui.hidenObj('homelg', '');
+        lg.getElemnets();
+        setTimeout(function () {
+            ui.startAnimation();
+        }, 1000)
+        
+      } else {
+        ui.showMessage('Inicia Sesion', "info");
+        ui.hidenObj('lgform', '');
+        ui.hidenObj('homelg', 'none');
+      }
+    });
+  }
+
+document.getElementById("inicio").addEventListener("click", function (e) {
     const lg = new LoginUser();
     const user = document.getElementById('NameUser').value,
         pass = document.getElementById('PassWord').value;
 
-    var access = lg.logUser(user, pass);
+    lg.logUser(user, pass);
 
-    if (access === true) {
-        ui.hidenObj('lgform', 'none');
-        ui.hidenObj('homelg', '');
-
-        ui.showMessage('ingreso exitoso', 'success');
-
-    } else {
-        ui.showMessage('Nombre de Usuario o Password Invalidas', 'danger');
-    }
-    
     e.preventDefault();
 });
-
-
-
-/* funcion disparadora registro */
 
 document.getElementById("registrate").addEventListener("click", function (e) {
 
     const ui = new UI();
     const lg = new LoginUser();
 
-    ui.hidenObj('inicio', 'none');
-    ui.hidenObj('re-pass', '');
-    ui.hidenObj('correo', '');
-
     const user = document.getElementById('NameUser').value,
         pass = document.getElementById('PassWord').value,
-       // email = document.getElementById('email').value,
+        email = document.getElementById('email').value,
         repass = document.getElementById('re-PassWord').value;
 
-    const newUser = new UserData(user, pass);
+    const userdata = new UserData(user, pass, email);
+    const cheker = lg.passCorrect(pass, repass);
+    const chekerEmail = lg.validar_email(email);
 
-    if (email === '' || repass === '') {
-        ui.showMessage('rellene los campos de registro', 'info');
-
-    } else if (lg.validar_pass(pass, repass)) {
-        if (lg.validar_email(email)) {
-            ui.showMessage('registro exitoso', 'success');
-
-
-            ui.resetForm('formlogin');
-            ui.hidenObj('inicio', '');
-            ui.hidenObj('re-pass', 'none');
-            ui.hidenObj('correo', 'none');
-            ui.resetForm();
-            ui.showMessage('Product Added Successfully', 'success');
-            ui.addCounter(newUser);
-        } else {
-            ui.showMessage('El correo esta mal', 'danger');
-        }
+    if (user === '' || email === '' || email === '' || repass === '') {
+        ui.showMessage("Llene todos los campos !!", "danger");
     } else {
-        ui.showMessage('las Password no Iguales', 'danger');
+        if (cheker === true) {
+            if (chekerEmail === true) {
+                lg.Register(userdata);
+            } else {
+                ui.showMessage("Correo Invalido", "danger");
+            }
+
+        } else {
+            ui.showMessage("no se pudo registrar, intende de nuevo.", "danger");
+
+        }
+
+
     }
+    console.log(chekerEmail);
+    e.preventDefault();
+
+});
+
+/* funcion disparadora registro */
+
+document.getElementById("OpenReg").addEventListener("click", function (e) {
+    const ui = new UI();
+    ui.hidenObj('inicio', 'none');
+    ui.hidenObj('OpenReg', 'none');
+    ui.hidenObj('re-pass', '');
+    ui.hidenObj('correo', '');
+    ui.hidenObj('registrate', '');
     e.preventDefault();
 });
+
+
 
 /* agrega un contador */
 document.getElementById('counter_form')
@@ -247,6 +333,7 @@ document.getElementById('counter_form')
         e.preventDefault();
 
     });
+
 /* boton para eliminar los elementos de las celdas*/
 document.getElementById('counters_list')
     .addEventListener('click', function (e) {
@@ -254,3 +341,11 @@ document.getElementById('counters_list')
         ui.deleteCounters(e.target);
         e.preventDefault();
     });
+
+document.getElementById("exit").addEventListener("click", function () {
+    let lg = new LoginUser();
+    const ui = new UI();
+
+    lg.exit();
+    ui.reStart();
+});
